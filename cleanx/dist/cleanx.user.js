@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         CleanX
-// @version      0.0.1
+// @version      0.0.2
 // @license      MIT
 // @downloadURL  https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js
 // @updateURL    https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js
