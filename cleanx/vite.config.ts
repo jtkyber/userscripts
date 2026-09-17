@@ -14,6 +14,7 @@ export default defineConfig({
           "https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js",
         grant: ["GM.getValue", "GM.setValue", "GM.registerMenuCommand"],
         license: "MIT",
+        "run-at": "document-start",
       },
     }),
   ],

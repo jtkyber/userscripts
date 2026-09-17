@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         CleanX
-// @version      0.0.3
+// @version      0.0.4
 // @license      MIT
 // @downloadURL  https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js
 // @updateURL    https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js
@@ -9,6 +9,7 @@
 // @grant        GM.getValue
 // @grant        GM.registerMenuCommand
 // @grant        GM.setValue
+// @run-at       document-start
 // ==/UserScript==
 
 (function() {
