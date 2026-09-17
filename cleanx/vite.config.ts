@@ -13,6 +13,7 @@ export default defineConfig({
         updateURL:
           "https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js",
         grant: ["GM.getValue", "GM.setValue", "GM.registerMenuCommand"],
+        license: "MIT",
       },
     }),
   ],
