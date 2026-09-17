@@ -4,10 +4,12 @@
 .settings {
   z-index: 1000;
   position: fixed;
-  right: 6rem;
-  bottom: 0.75rem;
-  height: 55px;
+  left: 0;
+  bottom: 0;
+  height: max-content;
   width: max-content;
+  padding: 0.5rem 0.75rem;
+  margin: 0.75rem;
   background-color: rgba(35, 154, 239, 0.65);
   box-shadow:
     0 0 15px rgba(255, 255, 255, 0.2),
