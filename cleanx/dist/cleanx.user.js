@@ -1,11 +1,14 @@
 // ==UserScript==
-// @name     CleanX
-// @version  0.0.0
-// @match    https://x.com/*
-// @grant    GM.addStyle
-// @grant    GM.getValue
-// @grant    GM.registerMenuCommand
-// @grant    GM.setValue
+// @name         CleanX
+// @version      0.0.1
+// @license      MIT
+// @downloadURL  https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js
+// @updateURL    https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js
+// @match        https://x.com/*
+// @grant        GM.addStyle
+// @grant        GM.getValue
+// @grant        GM.registerMenuCommand
+// @grant        GM.setValue
 // ==/UserScript==
 
 (function() {
