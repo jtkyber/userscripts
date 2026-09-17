@@ -15,6 +15,8 @@ export default defineConfig({
         grant: ["GM.getValue", "GM.setValue", "GM.registerMenuCommand"],
         license: "MIT",
         "run-at": "document-start",
+        description:
+          "Remove ads and hide unwanted UI elements on x.com. Includes a convenient custom settings menu.",
       },
     }),
   ],

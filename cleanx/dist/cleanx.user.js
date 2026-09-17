@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         CleanX
-// @version      0.0.4
+// @version      0.0.5
+// @description  Remove ads and hide unwanted UI elements on x.com. Includes a convenient custom settings menu.
 // @license      MIT
 // @downloadURL  https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js
 // @updateURL    https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js
