@@ -55,7 +55,8 @@ const clean = (settings: Settings) => {
       switch (selectorKey) {
         case "article":
           if (settings.hideAds) {
-            const isAd = el.querySelector(selectors.ad) !== null;
+            const adSpan = el.querySelector(selectors.ad) as HTMLElement;
+            const isAd = adSpan?.innerText.toLowerCase() === "ad";
             if (isAd) hide(el);
           }
           break;

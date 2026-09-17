@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         CleanX
-// @version      0.0.5
+// @version      0.0.6
 // @description  Remove ads and hide unwanted UI elements on x.com. Includes a convenient custom settings menu.
 // @license      MIT
 // @downloadURL  https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js
@@ -860,7 +860,7 @@
 				switch (selectorKey) {
 					case "article":
 						if (settings.hideAds) {
-							if (el.querySelector(selectors.ad) !== null) hide(el);
+							if (el.querySelector(selectors.ad)?.innerText.toLowerCase() === "ad") hide(el);
 						}
 						break;
 					case "rightColumn":
