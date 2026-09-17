@@ -1,0 +1,122 @@
+@media (prefers-color-scheme: dark) {
+}
+
+.settings {
+  z-index: 1000;
+  position: fixed;
+  right: 6rem;
+  bottom: 0.75rem;
+  height: 55px;
+  width: max-content;
+  background-color: rgba(35, 154, 239, 0.65);
+  box-shadow:
+    0 0 15px rgba(255, 255, 255, 0.2),
+    0 0 3px 1px rgba(255, 255, 255, 0.15);
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-family: TwitterChirp;
+  backdrop-filter: blur(12px);
+  transition: opacity 0.1s ease-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.menu {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  position: fixed;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 15rem;
+  height: max-content;
+  background-color: rgba(35, 154, 239, 0.65);
+  padding: 1rem;
+  border-radius: 1rem;
+  list-style: none;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: TwitterChirp;
+  transition: opacity 0.15s ease-out;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.3rem;
+
+  h2 {
+    font-size: medium;
+    text-align: center;
+    font-weight: 800;
+    margin: 0;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .nav-chunk {
+    padding: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.3rem;
+
+    &:has(> li.chunk-title > input:checked) {
+      .indented {
+        display: none;
+      }
+    }
+
+    li {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 1rem;
+      justify-content: space-between;
+      user-select: none;
+      font-weight: 600;
+
+      &.chunk-title {
+        width: 100%;
+
+        label {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 0;
+          user-select: none;
+          cursor: pointer;
+        }
+        input {
+          display: none;
+        }
+        span {
+          margin-right: 5px;
+        }
+      }
+
+      &.indented {
+        margin-left: 1rem;
+      }
+
+      label {
+        font-weight: 400;
+        cursor: pointer;
+        width: 100%;
+      }
+      input {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
