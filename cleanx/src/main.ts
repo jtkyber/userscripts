@@ -1,7 +1,6 @@
 import hide from "./actions/hide_element";
 import HideNavItem from "./actions/hide_nav_item";
 import Settings from "./settings";
-import { watchUrlChange } from "./utils";
 
 interface Selectors {
   article: string;
@@ -85,13 +84,19 @@ const clean = (settings: Settings) => {
           }
           break;
         case "composeBlock":
-          if (settings.sections.hideComposeBlock) hide(el);
+          if (
+            location.pathname === "/home" &&
+            settings.sections.hideComposeBlock
+          )
+            hide(el);
           break;
         case "timelineForYou":
-          if (settings.timelines.hideForYou) hide(el);
+          if (location.pathname === "/home" && settings.timelines.hideForYou)
+            hide(el);
           break;
         case "timelineFollowing":
           if (
+            location.pathname === "/home" &&
             settings.timelines.hideForYou &&
             (el as HTMLElement).ariaSelected === "false"
           ) {
@@ -99,7 +104,8 @@ const clean = (settings: Settings) => {
           }
           break;
         case "timelineAdder":
-          if (settings.timelines.hideAdder) hide(el);
+          if (location.pathname === "/home" && settings.timelines.hideAdder)
+            hide(el);
           break;
         case "navItem":
           HideNavItem(el, settings);
@@ -134,12 +140,6 @@ const cb = (mutations: MutationRecord[], settings: Settings) => {
 document.addEventListener("DOMContentLoaded", async () => {
   const settings = new Settings();
   await settings.init();
-
-  watchUrlChange((url) => {
-    if (url.includes("https://x.com/home")) {
-      clean(settings);
-    }
-  });
 
   clean(settings);
 

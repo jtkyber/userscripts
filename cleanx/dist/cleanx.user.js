@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         CleanX
-// @version      0.0.8
+// @version      0.0.9
 // @description  Remove ads and hide unwanted UI elements on x.com. Includes a convenient custom settings menu.
 // @license      MIT
 // @downloadURL  https://raw.githubusercontent.com/jtkyber/userscripts/main/cleanx/dist/cleanx.user.js
@@ -68,26 +68,6 @@
 				subtree: true
 			});
 		});
-	}
-	function watchUrlChange(callback) {
-		let lastUrl = location.href;
-		const fire = () => {
-			if (location.href !== lastUrl) {
-				lastUrl = location.href;
-				callback(location.href);
-			}
-		};
-		const origPush = history.pushState;
-		history.pushState = function(...args) {
-			origPush.apply(this, args);
-			fire();
-		};
-		const origReplace = history.replaceState;
-		history.replaceState = function(...args) {
-			origReplace.apply(this, args);
-			fire();
-		};
-		window.addEventListener("popstate", fire);
 	}
 	var style_default = "@media (prefers-color-scheme: dark) {\n}\n\n.settings {\n  z-index: 1000;\n  position: fixed;\n  left: 0;\n  bottom: 0;\n  height: max-content;\n  width: max-content;\n  padding: 0.5rem 0.75rem;\n  margin: 0.75rem;\n  background-color: rgba(35, 154, 239, 0.65);\n  box-shadow:\n    0 0 15px rgba(255, 255, 255, 0.2),\n    0 0 3px 1px rgba(255, 255, 255, 0.15);\n  outline: none;\n  border: 1px solid rgba(255, 255, 255, 0.3);\n  border-radius: 1rem;\n  color: white;\n  font-weight: 600;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n  font-family: TwitterChirp;\n  backdrop-filter: blur(12px);\n  transition: opacity 0.1s ease-out;\n\n  &:hover {\n    opacity: 0.8;\n  }\n}\n\n.menu {\n  opacity: 0;\n  pointer-events: none;\n  z-index: 999;\n  position: fixed;\n  left: 50%;\n  top: 0;\n  transform: translateX(-50%);\n  width: 15rem;\n  height: max-content;\n  background-color: rgba(35, 154, 239, 0.65);\n  padding: 1rem;\n  border-radius: 1rem;\n  list-style: none;\n  backdrop-filter: blur(12px);\n  border: 1px solid rgba(255, 255, 255, 0.3);\n  font-family: TwitterChirp;\n  transition: opacity 0.15s ease-out;\n  display: flex;\n  flex-flow: column nowrap;\n  gap: 0.3rem;\n\n  h2 {\n    font-size: medium;\n    text-align: center;\n    font-weight: 800;\n    margin: 0;\n    margin-bottom: 0.5rem;\n    color: rgba(255, 255, 255, 0.8);\n  }\n\n  .nav-chunk {\n    padding: 0;\n    display: flex;\n    flex-flow: column nowrap;\n    gap: 0.3rem;\n\n    &:has(> li.chunk-title > input:checked) {\n      .indented {\n        display: none;\n      }\n    }\n\n    li {\n      display: flex;\n      flex-flow: row nowrap;\n      gap: 1rem;\n      justify-content: space-between;\n      user-select: none;\n      font-weight: 600;\n\n      &.chunk-title {\n        width: 100%;\n\n        label {\n          display: flex;\n          justify-content: space-between;\n          align-items: center;\n          margin: 0;\n          user-select: none;\n          cursor: pointer;\n        }\n        input {\n          display: none;\n        }\n        span {\n          margin-right: 5px;\n        }\n      }\n\n      &.indented {\n        margin-left: 1rem;\n      }\n\n      label {\n        font-weight: 400;\n        cursor: pointer;\n        width: 100%;\n      }\n      input {\n        cursor: pointer;\n      }\n    }\n  }\n\n  &.show {\n    opacity: 1;\n    pointer-events: all;\n  }\n}\n";
 	var require_html = __commonJSMin(((exports) => {
@@ -880,16 +860,16 @@
 						if (settings.sections.hideLeftColumn) el.style.setProperty("align-items", "center", "important");
 						break;
 					case "composeBlock":
-						if (settings.sections.hideComposeBlock) hide(el);
+						if (location.pathname === "/home" && settings.sections.hideComposeBlock) hide(el);
 						break;
 					case "timelineForYou":
-						if (settings.timelines.hideForYou) hide(el);
+						if (location.pathname === "/home" && settings.timelines.hideForYou) hide(el);
 						break;
 					case "timelineFollowing":
-						if (settings.timelines.hideForYou && el.ariaSelected === "false") el.click();
+						if (location.pathname === "/home" && settings.timelines.hideForYou && el.ariaSelected === "false") el.click();
 						break;
 					case "timelineAdder":
-						if (settings.timelines.hideAdder) hide(el);
+						if (location.pathname === "/home" && settings.timelines.hideAdder) hide(el);
 						break;
 					case "navItem":
 						HideNavItem(el, settings);
@@ -914,9 +894,6 @@
 	document.addEventListener("DOMContentLoaded", async () => {
 		const settings = new Settings();
 		await settings.init();
-		watchUrlChange((url) => {
-			if (url.includes("https://x.com/home")) clean(settings);
-		});
 		clean(settings);
 		new MutationObserver((m) => cb(m, settings)).observe(document.body, {
 			childList: true,
