@@ -8,6 +8,7 @@ interface Selectors {
   ad: string;
   rightColumn: string;
   primaryColumn: string;
+  feedContainer: string;
   leftColumn: string;
   main: string;
   composeBlock: string;
@@ -27,6 +28,8 @@ const selectors: Selectors = {
   ad: "main article > div > div > div:nth-child(2) > div:nth-child(2) > div:first-child > div > div:nth-child(2) > div > div:first-child > span",
   rightColumn: 'main div[data-testid="sidebarColumn"]',
   primaryColumn: 'main div[data-testid="primaryColumn"]',
+  feedContainer:
+    'main div[data-testid="primaryColumn"] div[aria-label="Home timeline"] div:nth-child(5)',
   leftColumn: 'header[role="banner"]',
   main: "main",
   composeBlock: 'main div[aria-label="Home timeline"] > div:nth-child(3)',
@@ -64,6 +67,11 @@ const clean = (settings: Settings) => {
           if (settings.sections.hideRightColumn) hide(el);
           break;
         case "primaryColumn":
+          if (settings.sections.hideRightColumn) {
+            el.style.setProperty("max-width", "100%", "important");
+          }
+          break;
+        case "feedContainer":
           if (settings.sections.hideRightColumn) {
             el.style.setProperty("max-width", "100%", "important");
           }
